@@ -25,15 +25,26 @@ public class PandemicDay {
     @JoinColumn(name = "simulation_id")
     private Simulation simulation;
 
+    public Long getDay() {
+        return day;
+    }
+
+    public void setDay(Long day) {
+        this.day = day;
+    }
+
+    private Long day;
+
     public PandemicDay() {
     }
 
-    public PandemicDay(Simulation simulation, Long Pi, Long Pv, Long Pm, Long Pr) {
+    public PandemicDay(Simulation simulation, Long Pi, Long Pv, Long Pm, Long Pr, Long day) {
         this.simulation = simulation;
         this.Pi = Pi;
         this.Pv = Pv;
         this.Pm = Pm;
         this.Pr = Pr;
+        this.day = day;
     }
 
     public Long getId() {

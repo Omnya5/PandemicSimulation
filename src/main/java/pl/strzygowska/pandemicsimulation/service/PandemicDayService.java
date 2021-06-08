@@ -21,8 +21,8 @@ public class PandemicDayService {
     private long newDead;
     private long newRecovered;
 
-    public PandemicDay createPandemicDay(Simulation simulation, Long Pi, Long Pv, Long Pm, Long Pr) {
-        PandemicDay pandemicDay = new PandemicDay(simulation, Pi, Pv, Pm, Pr);
+    public PandemicDay createPandemicDay(Simulation simulation, Long Pi, Long Pv, Long Pm, Long Pr, Long day) {
+        PandemicDay pandemicDay = new PandemicDay(simulation, Pi, Pv, Pm, Pr, day);
         pandemicDayDAO.save(pandemicDay);
         simulation.getPandemicDays().add(pandemicDay);
         return pandemicDay;
@@ -34,7 +34,7 @@ public class PandemicDayService {
           if (pi > p) {
             pi = p;
         }
-        return createPandemicDay(simulation, pi, p - pi, 0L, 0L);
+        return createPandemicDay(simulation, pi, p - pi, 0L, 0L, 1L);
     }
 
     public void generatePandemicDays(Simulation simulation) {
@@ -59,6 +59,7 @@ public class PandemicDayService {
             newDead = 0;
             newInfected = 0;
             newRecovered = 0;
+//            if(a)
             if (numberOfDay >= tm) {
                 newDead = (long) (m * infectedByDay.get(numberOfDay - tm));
             }
@@ -83,7 +84,7 @@ public class PandemicDayService {
             if ((pm + pr) > p) {
                 break;
             }
-            createPandemicDay(simulation, pi, pv, pm, pr);
+            createPandemicDay(simulation, pi, pv, pm, pr, (long) (numberOfDay + 1));
         }
     }
 
