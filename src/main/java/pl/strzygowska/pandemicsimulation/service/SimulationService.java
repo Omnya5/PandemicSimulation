@@ -16,14 +16,8 @@ public class SimulationService {
     private SimulationDAO simulationDAO;
 
     public List<PandemicDay> getPandemicDays(Simulation simulation){
+       return simulation.getPandemicDays();
         // TODO: implement logic
-        return new ArrayList<PandemicDay>();
-    }
-
-    public void createPandemicDays(Integer Ts){
-        for (int i = 0; i < Ts; i++) {
-
-        }
     }
 
     public Simulation createSimulation(String N, Long P, Long I,
@@ -31,6 +25,10 @@ public class SimulationService {
         Simulation simulation = new Simulation(N, P, I, R, M, Ti, Tm, Ts);
         simulationDAO.save(simulation);
         return simulation;
+    }
+
+    public Simulation getSimulationByName(String name) {
+        return simulationDAO.findByN(name);
     }
 }
 

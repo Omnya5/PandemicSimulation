@@ -16,7 +16,7 @@ public class Simulation {
     private List<PandemicDay> pandemicDays = new ArrayList<>();
 
     @Column(name = "name", unique = true, nullable = false)
-    private String N;
+    private String n;
 
     @Column(name = "population", nullable = false)
     private Long P;
@@ -42,9 +42,9 @@ public class Simulation {
     public Simulation() {
     }
 
-    public Simulation(String N, Long P, Long I, Float R, Float M,
+    public Simulation(String n, Long P, Long I, Float R, Float M,
                       Integer Ti, Integer Tm, Integer Ts) {
-        this.N = N;
+        this.n = n;
         this.P = P;
         this.I = I;
         this.R = R;
@@ -70,12 +70,12 @@ public class Simulation {
         this.id = id;
     }
 
-    public String getN() {
-        return N;
+    public String getn() {
+        return n;
     }
 
-    public void setN(String N) {
-        this.N = N;
+    public void setn(String n) {
+        this.n = n;
     }
 
     public Long getP() {

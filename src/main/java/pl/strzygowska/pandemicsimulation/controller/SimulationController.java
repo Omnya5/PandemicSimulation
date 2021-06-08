@@ -5,10 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import pl.strzygowska.pandemicsimulation.model.PandemicDay;
 import pl.strzygowska.pandemicsimulation.model.Simulation;
 import pl.strzygowska.pandemicsimulation.service.PandemicDayService;
 import pl.strzygowska.pandemicsimulation.service.SimulationService;
+
+import java.util.List;
 
 @Controller
 public class SimulationController {
@@ -20,7 +24,8 @@ public class SimulationController {
     private PandemicDayService pandemicDayService;
 
     @RequestMapping(value = "createSimulation", method = RequestMethod.GET)
-    public ModelAndView createSimulation(ModelAndView mv,
+    @ResponseBody
+    public List<PandemicDay> createSimulation(ModelAndView mv,
                                          @RequestParam(name = "N") String N,
                                          @RequestParam(name = "P") Long P,
                                          @RequestParam(name = "I") Long I,
@@ -31,6 +36,15 @@ public class SimulationController {
                                          @RequestParam(name = "Ts") Integer Ts){
         Simulation s = simulationService.createSimulation(N, P, I, Float.parseFloat(R), Float.parseFloat(M), Ti, Tm, Ts);
         pandemicDayService.generatePandemicDays(s);
-        return mv;
+        List<PandemicDay> pandemicDays = pandemicDayService.getPandemicDaysForSimulation(s);
+        return pandemicDays;
+    }
+
+    @RequestMapping(value = "getSimulation", method = RequestMethod.GET)
+    @ResponseBody
+    public List<PandemicDay> getSimulation(@RequestParam(name = "N") String N){
+        Simulation s = simulationService.getSimulationByName(N);
+        List<PandemicDay> pandemicDays = pandemicDayService.getPandemicDaysForSimulation(s);
+        return pandemicDays;
     }
 }
