@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.strzygowska.pandemicsimulation.model.PandemicDay;
 import pl.strzygowska.pandemicsimulation.model.Simulation;
 import pl.strzygowska.pandemicsimulation.model.SimulationDAO;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

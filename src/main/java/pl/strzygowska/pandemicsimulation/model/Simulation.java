@@ -1,6 +1,7 @@
 package pl.strzygowska.pandemicsimulation.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,28 +16,49 @@ public class Simulation {
     @OneToMany(mappedBy = "simulation", cascade = CascadeType.ALL)
     private List<PandemicDay> pandemicDays = new ArrayList<>();
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name", unique = true)
+    @NotBlank(message = "Please enter name of simulation")
+    @Size(max = 255, message = "name must have maximum 255 characters")
     private String n;
 
-    @Column(name = "population", nullable = false)
+    @Column(name = "population")
+    @NotNull(message = "Please enter population size")
+    @Min(value = 1, message = "Population size must be greater than 1")
     private Long P;
 
-    @Column(name = "infected", nullable = false)
+    @Column(name = "infected")
+    @NotNull(message = "Please enter number of infected")
+    @Min(value = 1, message = "Number of infected must be greater than 1")//TODO: infected < population
     private Long I;
 
-    @Column(name = "rate", nullable = false)
+    @Column(name = "rate")
+    @NotNull(message = "Please enter infection rate")
+    @Min(value = 0, message = "Infection rate must be greater than 0")
+    @Max(value = 1000000000, message = "Infection rate must be less than 1000000000")
     private Float R;
 
-    @Column(name = "mortality_rate", nullable = false)
+    @Column(name = "mortality_rate")
+    @NotNull(message = "Please enter mortality rate")
+    @Min(value = 0, message = "Mortality rate must be equal or greater than 0")
+    @Max(value = 1, message = "Mortality rate must be less than 1")
     private Float M;
 
-    @Column(name = "infection_time", nullable = false)
+    @Column(name = "infection_time")
+    @NotNull(message = "Please enter infection time")
+    @Min(value = 0, message = "Infection time must be greater than 0")
+    @Max(value = 1000000000, message = "Infection time must be less than 1000000000")
     private Integer Ti;
 
-    @Column(name = "mortality_time", nullable = false)
+    @Column(name = "mortality_time")
+    @NotNull(message = "Please enter mortality time")
+    @Min(value = 0, message = "Mortality time must be greater than 0")
+    @Max(value = 1000000000, message = "Mortality time must be less than 1000000000")//TODO: tm < ti
     private Integer Tm;
 
-    @Column(name = "simulation_time", nullable = false)
+    @Column(name = "simulation_time")
+    @NotNull(message = "Please enter simulation time")
+    @Min(value = 0, message = "Simulation time must be greater than 0")
+    @Max(value = 1000000000, message = "Simulation time must be less than 1000000000")
     private Integer Ts;
 
     public Simulation() {
