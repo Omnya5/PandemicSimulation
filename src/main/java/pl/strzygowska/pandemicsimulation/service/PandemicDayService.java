@@ -29,7 +29,12 @@ public class PandemicDayService {
     }
 
     private PandemicDay getFirstPandemicDay(Simulation simulation) {
-        return createPandemicDay(simulation, simulation.getI(), simulation.getP() - simulation.getI(), 0L, 0L);
+        long pi = simulation.getI();
+        long p = simulation.getP();
+          if (pi > p) {
+            pi = p;
+        }
+        return createPandemicDay(simulation, pi, p - pi, 0L, 0L);
     }
 
     public void generatePandemicDays(Simulation simulation) {
@@ -47,6 +52,9 @@ public class PandemicDayService {
         int tm = simulation.getTm();
         infectedByDay.put(0, pi);
         deadByDay.put(0, pm);
+        if (ti < tm ){
+            tm = ti;
+        }
         for (int numberOfDay = 1; numberOfDay < simulation.getTs(); numberOfDay++) {
             newDead = 0;
             newInfected = 0;
