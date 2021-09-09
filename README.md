@@ -12,4 +12,4 @@ Początkowe parametry:
 ● Tm - ilość dni, która upływa od momentu zarażenia do śmierci chorego
 ● Ts - ilość dni, dla których ma być przeprowadzona symulacja
 
-Po zdefioniowaniu symulacji system będzie generował początkową populację, a nastepnie zasymulowane dla każdego dnia symulacji dane (Pi, Pv, Pm, Pr), przechowyjące informacje odpowiednio o: liczbie osób zarażonych, zdrowych i podatnych na infekcję, zmarłych oraz osób, które wyzdrowiały i nabyły odporność.
+Po zdefiniowaniu symulacji system będzie generował początkową populację, a nastepnie zasymulowane dla każdego dnia symulacji dane (Pi, Pv, Pm, Pr), przechowyjące informacje odpowiednio o: liczbie osób zarażonych, zdrowych i podatnych na infekcję, zmarłych oraz osób, które wyzdrowiały i nabyły odporność.
